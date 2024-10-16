@@ -3,22 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FinReport Ai</title>
-    <!-- <link rel="stylesheet" href="style.css"> -->
+    <title>FinReportAI</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Upload File</h1>
-    <div class="file-upload" id="dropArea" onclick="document.getElementById('fileInput').click();">
-        <p>Click or drag files here</p>
+    <div class="header">
+        <div class="header-text">FinReportAI</div>
+        <div class="subheader-text">Your Financial Report Analysis Tool</div>
     </div>
-    <!-- <input type="file" id="fileInput" multiple onchange="handleFiles(this.files)"> -->
-    <input type="file" id="fileInput" accept="image/*">
-    <div id="fileList">
-        <h3>Selected Files:</h3>
-        <ul id="files"></ul>
-        <input type="submit" id="uploadFile" value="Upload files">
+    <div class="content">
+        <div class="container">
+            <div class="container-one">
+            <h3>Upload Your Financial Report Here</h3>
+            <div class="file-upload" id="dropArea" onclick="document.getElementById('fileInput').click();">
+                <p>Click or drag files here</p>
+            </div>
+            <label for="fileInput" id="fileInputLabel">Choose File</label>
+            <input type="file" id="fileInput" accept="image/*" style="display: none;">
+            </div>
+            <div class="container-two">
+                <div id="fileList">
+                    <h3>Selected Files</h3>
+                    <ul id="files"></ul>
+                <input type="submit" id="uploadFile" value="Upload files">
+                </div>
+            </div>
+        </div>
     </div>
-
 </body>
 <script src="script.js"></script>
-</html>
