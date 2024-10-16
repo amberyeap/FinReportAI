@@ -1,8 +1,10 @@
 import requests
 import flask
 from flask import request, jsonify
+from flask_cors import CORS
 
 app = flask.Flask(__name__)
+CORS(app, resources={r"/api/*": {"origins": "*"}})
 
 # API Key
 api_key = "bbc0e788431742eaaee372866957d361"
@@ -47,7 +49,7 @@ def construct_csv_payload(api_key, summary):
     return headers, prompt_messages
 
 # API endpoint to receive data from the JS frontend
-@app.route('/api/parse_data', methods=['POST'])
+@app.route('/api/parse_data', methods=['POST', 'GET'])
 def parse_data():
     data = request.get_json()
     image_url = data['image_url']
