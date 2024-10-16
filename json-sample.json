@@ -1,0 +1,44 @@
+{
+    "messages": [
+        {
+            "role": "system",
+            "content": [
+                {
+                    "type": "text",
+                    "text": "You are an AI assistant that helps people find information."
+                }
+            ]
+        },
+        {
+            "role": "user",
+            "content": [
+                {
+                    "type": "text",
+                    "text": "\n"
+                },
+                {
+                    "type": "image_url",
+                    "image_url": {
+                        "url": "https://storagekhen.blob.core.windows.net/file/abc.jpg?sp=r&st=2024-10-15T05:16:08Z&se=2024-10-23T13:16:08Z&spr=https&sv=2022-11-02&sr=b&sig=4GTAFcWl%2BMnZ64aAqVCBg%2FZ%2BgYmg2nLPgE0VvEXifCw%3D"
+                    }
+                },
+                {
+                    "type": "text",
+                    "text": "\n"
+                }
+            ]
+        },
+        {
+            "role": "user",
+            "content": [
+                {
+                    "type": "text",
+                    "text": "name all the company"
+                }
+            ]
+        }
+    ],
+    "temperature": 0.7,
+    "top_p": 0.95,
+    "max_tokens": 800
+}
