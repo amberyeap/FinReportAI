@@ -1,5 +1,5 @@
 // const API_KEY = 'bbc0e788431742eaaee372866957d361';
-const apiUrl = "http://localhost:5000/api/parse_data";
+const apiUrl = "http://localhost:5500/api/parse_data";
 
 const dropArea = document.getElementById("dropArea");
 const fileInput = document.getElementById("fileInput");
