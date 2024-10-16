@@ -49,7 +49,7 @@ def construct_csv_payload(api_key, summary):
     return headers, prompt_messages
 
 # API endpoint to receive data from the JS frontend
-@app.route('/api/parse_data', methods=['POST', 'GET'])
+@app.route('/parse_data', methods=['POST', 'GET'])
 def parse_data():
     data = request.get_json()
     image_url = data['image_url']
