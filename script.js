@@ -1,5 +1,5 @@
 // const API_KEY = 'bbc0e788431742eaaee372866957d361';
-const apiUrl = "http://localhost:5500/parse_data";
+const apiUrl = "http://localhost:5000/api/parse_data";
 
 const dropArea = document.getElementById("dropArea");
 const fileInput = document.getElementById("fileInput");
@@ -97,11 +97,10 @@ async function handleUpload() {
 
             const responseData = await response.json();
             console.log(responseData);
-            
-            if (resultDiv && responseData.choices && responseData.choices[0]) {
-                resultDiv.textContent = responseData.choices[0].message.content;
+            if (resultDiv && responseData.csv_content) {
+             resultDiv.textContent = responseData.csv_content;
             } else {
-                resultDiv.textContent = "Unexpected response format from the server.";
+             resultDiv.textContent = "Unexpected response format from the server.";
             }
         } catch (error) {
             console.error("Error:", error);

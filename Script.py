@@ -1,13 +1,10 @@
 import requests
-import flask
-from flask import request, jsonify
-from flask_cors import CORS
-
-app = flask.Flask(__name__)
-CORS(app, resources={r"/api/*": {"origins": "*"}})
 
 # API Key
 api_key = "bbc0e788431742eaaee372866957d361"
+
+# Image URL
+image_url = "https://i.imgur.com/NQLtRtT.jpeg"
 
 # Function to construct the payload for the summary
 def construct_summary_payload(api_key, image_url):
@@ -18,7 +15,7 @@ def construct_summary_payload(api_key, image_url):
     prompt_messages = [
         {
             "role": "user",
-            "content": f"I want to have a summary of all the data from {image_url} in table form"
+            "content": f"I want to extract out all the field names that are found in the picture at {image_url} and list them out."
         }
     ]
     return headers, prompt_messages
@@ -48,15 +45,12 @@ def construct_csv_payload(api_key, summary):
     ]
     return headers, prompt_messages
 
-# API endpoint to receive data from the JS frontend
-@app.route('/parse_data', methods=['POST', 'GET'])
-def parse_data():
-    data = request.get_json()
-    image_url = data['image_url']
-    
-    # Step 1: Get the summary from the API
+# Main function
+def main():
     headers, prompt_messages = construct_summary_payload(api_key, image_url)
     payload = {"messages": prompt_messages}
+    
+    # Step 1: Get the summary from the API
     response = send_message(payload, headers)
     summary = response["choices"][0]["message"]["content"]
     
@@ -66,8 +60,9 @@ def parse_data():
     response = send_message(payload, headers)
     csv_content = response["choices"][0]["message"]["content"]
     
-    # Step 3: Return the CSV formatted text
-    return jsonify({'csv_content': csv_content})
+    # Step 3: Save the CSV formatted text to a file
+    with open("output.csv", "w", newline="") as csvfile:
+        csvfile.write(csv_content)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    main()
