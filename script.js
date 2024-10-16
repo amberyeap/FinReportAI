@@ -1,5 +1,5 @@
-const API_KEY = 'bbc0e788431742eaaee372866957d361';
-const apiUrl = "https://mini-hackathon-43kl.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-02-15-preview";
+// const API_KEY = 'bbc0e788431742eaaee372866957d361';
+const apiUrl = "http://localhost:5000/api/parse_data";
 
 const dropArea = document.getElementById("dropArea");
 const fileInput = document.getElementById("fileInput");
@@ -82,29 +82,13 @@ async function handleUpload() {
     reader.onload = async () => {
         const base64Image = reader.result;
 
-        const messages = [
-            { "role": "system", "content": "You are a helpful assistant that can analyze images." },
-            { "role": "user", "content": [
-                { "type": "text", "text": "Please analyze this image and describe what you see." },
-                { "type": "image_url", "image_url": { "url": base64Image } }
-            ]}
-        ];
-
-        const payload = {
-            "messages": messages,
-            "max_tokens": 300
-        };
-
-        const headers = {
-            'Content-Type': 'application/json',
-            'api-key': API_KEY
-        };
-
         try {
             const response = await fetch(apiUrl, {
                 method: 'POST',
-                headers: headers,
-                body: JSON.stringify(payload)
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ image_url: base64Image })
             });
 
             if (!response.ok) {
@@ -115,14 +99,22 @@ async function handleUpload() {
             console.log(responseData);
             
             if (resultDiv && responseData.choices && responseData.choices[0]) {
-                resultDiv.textContent = response .choices[0].message.content;
+                resultDiv.textContent = responseData.choices[0].message.content;
+            } else {
+                resultDiv.textContent = "Unexpected response format from the server.";
             }
         } catch (error) {
             console.error("Error:", error);
+            if (resultDiv) {
+                resultDiv.textContent = "An error occurred while analyzing the image. Please try again.";
+            }
         }
     };
 
     reader.onerror = (error) => {
         console.error("Error reading file:", error);
+        if (resultDiv) {
+            resultDiv.textContent = "Error reading the file. Please try again.";
+        }
     };
 }
