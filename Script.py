@@ -71,4 +71,4 @@ def parse_data():
     return jsonify({'csv_content': csv_content})
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(port = 5500, debug=True)
