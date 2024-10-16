@@ -4,16 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FinReport Ai</title>
-    <script src="script.js"></script>
-    <link rel="stylesheet" href="style.css">
+    <!-- <link rel="stylesheet" href="style.css"> -->
 </head>
 <body>
     <h1>Upload File</h1>
     <div class="file-upload" id="dropArea" onclick="document.getElementById('fileInput').click();">
         <p>Click or drag files here</p>
     </div>
-    <input type="file" id="fileInput" multiple onchange="handleFiles(this.files)">
-
+    <!-- <input type="file" id="fileInput" multiple onchange="handleFiles(this.files)"> -->
+    <input type="file" id="fileInput" accept="image/*">
     <div id="fileList">
         <h3>Selected Files:</h3>
         <ul id="files"></ul>
@@ -21,4 +20,5 @@
     </div>
 
 </body>
+<script src="script.js"></script>
 </html>
